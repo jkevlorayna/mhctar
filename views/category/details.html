@@ -1,0 +1,43 @@
+
+<div class="block-flat">
+						<div class="header">			
+								<div class="pull-right"> 
+									<a href="#/category/{{Id}}/details/form/0"  class="btn btn-info"><i class="fa fa-plus-circle"></i> Add {{Category.Name}}</a>
+								</div>						
+											<h3>{{Category.Name}} List</h3>
+						</div>
+<div class="row">
+	<div class="col-md-12">
+					<form ng-submit="load()">
+						<div class="input-group col-sm-5">
+							<input type="text" class="form-control" ng-model="searchText">
+							<span class="input-group-btn">
+							<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Search</button>
+							</span>
+						</div>
+					</form>
+					
+				<div class="alert alert-danger" ng-show="list.length <= 0">No Results Found</div>			
+				<table class="table table-bordered table-condensed" ng-if="list.length > 0">
+				<thead>
+					<tr>
+						<th>Category</th>
+						<th>Description</th>
+						<th width="20%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in list">
+						<td>{{row.Name}}</td>
+						<td>{{row.Description}}</td>
+						<td>
+							<a class="btn btn-success btn-sm"  href="#/category/{{Id}}/details/form/{{row.Id}}"><i class="fa fa-edit"></i></a>
+							<button class="btn btn-danger btn-sm" ng-click="openDeleteModal('md',row.Id)"><i class="fa fa-trash-o"></i> </button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			 <uib-pagination ng-hide="list.length <= 0" ng-model="pageNo" ng-click="pageChanged()" items-per-page="pageSize" total-items="count"  max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></uib-pagination>
+	</div>
+</div>
+</div>

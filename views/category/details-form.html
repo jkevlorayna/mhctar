@@ -1,0 +1,101 @@
+<div class="block-flat">
+	<div class="header">	
+		<div class="pull-right"><a href="#/category/{{CategoryId}}/details" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back</a></div>
+		<h3>{{pageTitle}}</h3>
+	</div>
+
+<div class="tab-container" style="margin-top:15px;">
+<form  ng-submit="save()">
+<div class="pull-right">
+	<a href="javascript:void(0)" ng-click="openTabModal('lg',Id)"><i class="fa fa-gears fa-2x"></i></a>
+</div>
+						<ul class="nav nav-tabs">
+					
+						  <li class="active"><a data-toggle="tab" data-target="#details">Details</a></li>
+						  <li class="" ng-repeat="row in formData.DetailsTabs">
+								<a data-toggle="tab" data-target="#tab{{row.Id}}">{{row.Name}}</a>
+						  </li>
+						  
+						</ul>
+						<div class="tab-content nomargin">
+
+						  <div id="details" class="tab-pane cont active">
+
+
+
+	<div class="row">
+	<div class="col-md-12">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Name</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" ng-model="formData.Name" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Description</label>
+						<div class="col-sm-9">
+							<textarea type="text" class="form-control" rows="5" ng-model="formData.Description" required></textarea>
+							
+
+						</div>
+					</div>
+
+
+					
+
+  <hr>
+					
+
+					
+				</div>	
+				
+			
+	</div>
+	</div>
+
+								
+								
+						  </div>
+
+
+						  
+						  	 <div id="image" class="tab-pane cont">
+								<file-uploader></file-uploader>
+								<div class="row placeGallery">
+									<div class="col-md-12" ng-if="!Images">
+										<div class="alert alert-danger">No Results Found</div>
+									</div>
+									<div class="col-xs-6 col-md-3 imageCol" ng-repeat="row in Images">										
+											<a href="#" class="thumbnail">
+												<img class="img-responsive" alt="image" ng-src="core/class/uploads/{{Id}}/{{row.filename}}">
+											</a>
+											<a href="javascript:void(0)" ng-click="removeFile(row.filename,Id)" class="text-danger"><i class="fa fa-times"></i> remove</a>
+									</div>
+								</div>
+							</div>
+							
+							
+							 <div  ng-repeat="row in formData.DetailsTabs" id="tab{{row.Id}}" class="tab-pane">
+						  			<div class="form-group">
+										<label class="control-label">{{row.Name}}</label>
+										<textarea ng-model="row.Content" data-ck-editor></textarea>
+									</div>
+							</div>
+
+					
+
+					
+						<div class="text-center">
+							<button  type="submit" class="btn btn-success"><i class="fa fa-save"></i> Save</button>	
+							<a href="javascript:void(0)" ng-click="NewContent()" class="btn btn-info"><i class="fa fa-plus"></i> New </button>	
+						</div>
+						
+						  
+						  
+						</div>
+					</div>
+
+					</form>
+
+</div>

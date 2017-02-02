@@ -1,0 +1,50 @@
+
+<div class="block-flat">
+	
+		<ul class="nav nav-tabs nomargin">
+			<li ng-repeat="row in CategoryList" ng-class="{active: CategoryId == row.Id}" >
+				<a href="#/category/{{row.Id}}/default/tabs">{{row.Name}}</a>
+			</li>
+		</ul>
+<div class="row">
+	<div class="col-md-3">
+		<form method="POST" ng-submit="save()">
+				<div class="form-group">
+					<label for="exampleInputPassword1">Name</label>
+					<input type="text" ng-model="formData.Name"  class="form-control" required>
+				</div>
+				<button type="submit"  class="btn btn-success btn-sm"><i class="fa fa-save"></i> Save</button>
+		</form>
+	</div>
+	<div class="col-md-9">
+					<form ng-submit="load()">
+						<div class="input-group col-sm-5">
+							<input type="text" class="form-control" ng-model="searchText">
+							<span class="input-group-btn">
+							<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> Search</button>
+							</span>
+						</div>
+					</form>
+					
+
+				<table class="table table-bordered table-condensed">
+				<thead>
+					<tr>
+						<th>Category</th>
+						<th width="20%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in list">
+						<td>{{row.Name}}</td>
+						<td>
+							<button class="btn btn-success btn-sm" ng-click="getById(row.Id)"><i class="fa fa-edit"></i></button>
+							<button class="btn btn-danger btn-sm" ng-click="openDeleteModal('md',row.Id)"><i class="fa fa-trash-o"></i> </button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+	</div>
+</div>
+</div>

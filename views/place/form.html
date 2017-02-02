@@ -1,0 +1,192 @@
+<div class="tab-container">
+<form  ng-submit="save()">
+<div class="pull-right">
+	<a href="javascript:void(0)" ng-click="openTabModal('lg',Id)"><i class="fa fa-gears fa-2x"></i></a>
+</div>
+						<ul class="nav nav-tabs">
+					
+						  <li class="active"><a data-toggle="tab" data-target="#details">Details</a></li>
+<!-- 						  <li ng-if="Id!=0"><a data-toggle="tab" data-target="#image">Images</a></li>
+						  <li ng-if="Id!=0"><a data-toggle="tab" data-target="#review">Reviews</a></li>
+						  <li ng-if="Id!=0"><a data-toggle="tab" data-target="#rating">User Rating</a></li> -->
+						  
+						  <li class="" ng-repeat="row in formData.placeTab.Results">
+							<a data-toggle="tab" data-target="#tab{{row.Id}}">{{row.name}}</a>
+						  </li>
+						  
+						</ul>
+						<div class="tab-content nomargin">
+
+						  <div id="details" class="tab-pane cont active">
+
+
+						<div class="header">	
+							<div class="pull-right"><a href="#/place/list" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back</a></div>
+							<h3>{{pageTitle}}</h3>
+						</div>
+	<div class="row">
+	<div class="col-md-7 col-md-offset-2">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Name</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" ng-model="formData.Name" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Address</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" ng-model="formData.Address" >
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Category</label>
+						<div class="col-sm-9">
+							<select class="form-control" ng-model="formData.PlaceCategoryId" ng-options="row.Id as row.Name  for row in categoryList" required></select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-9 col-sm-offset-3">
+							<div class="alert alert-info nomargin">For Google Map</div>
+						</div>	
+					</div>	
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Latitude</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" ng-model="formData.Latitude" >
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Longitude</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" ng-model="formData.Longitude" >
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Website Url</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" ng-model="formData.WebsiteUrl" >
+						</div>
+					</div>
+
+
+
+
+  <hr>
+					
+					<div class="form-group">
+						<div class="col-sm-9 col-sm-offset-3">
+							<button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+						</div>
+					</div>
+					
+				</div>	
+				
+			
+	</div>
+	</div>
+
+								
+								
+						  </div>
+
+
+						  
+						  	 <div id="image" class="tab-pane cont">
+								<file-uploader></file-uploader>
+								<div class="row placeGallery">
+									<div class="col-md-12" ng-if="!Images">
+										<div class="alert alert-danger">No Results Found</div>
+									</div>
+									<div class="col-xs-6 col-md-3 imageCol" ng-repeat="row in Images">										
+											<a href="#" class="thumbnail">
+												<img class="img-responsive" alt="image" ng-src="core/class/uploads/{{Id}}/{{row.filename}}">
+											</a>
+											<a href="javascript:void(0)" ng-click="removeFile(row.filename,Id)" class="text-danger"><i class="fa fa-times"></i> remove</a>
+									</div>
+								</div>
+							</div>
+							
+							
+							 <div id="review" class="tab-pane cont">
+
+							 
+							 					<div class="block-flat">
+						<div class="header">							
+							<h3>Latest Review</h3>
+						</div>
+						<div class="content" ng-if="reviewCount > 0">
+							<ul class="list-group tickets">
+							  <li class="list-group-item" ng-repeat="rrow in reviewList">
+
+									<img style="width:50px;hieght:50px" ng-src="{{rrow.ImageUrl}}" src="core/images/avatar.jpg" alt="user-avatar" class="avatar"> 
+									<h4 class="name">{{rrow.name}}</h4>
+									<p>{{rrow.content}}</p> 
+									<span class="date">{{rrow.reviewDate | date:'MMMM dd yyyy' }}</span>
+									
+									<div class="pull-right">
+										<a href="" ng-click="removeReview('md',rrow.Id)" class="text-danger"><i class="fa fa-trash-o"></i></a>
+									</div>
+							  </li>
+							</ul>
+							<uib-pagination ng-model="pageNo" ng-click="pageChanged()" items-per-page="pageSize" total-items="reviewCount"  max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></uib-pagination>
+							
+						</div>
+						
+						<div class="alert alert-danger" ng-if="reviewCount == 0">No Review for this place</div>
+					</div>
+							 
+							 
+							</div>
+							
+							
+					
+					<div id="rating" class="tab-pane cont">
+							<div class="block-flat">
+								<div class="header">							
+									<h3>User Rating</h3>
+								</div>
+								<div class="content">
+								
+															<ul class="list-group tickets">
+							  <li class="list-group-item" ng-repeat="ratingrow in ratingList">
+
+									<img style="width:50px;hieght:50px" ng-src="{{ratingrow.ImageUrl}}" src="core/images/avatar.jpg" alt="user-avatar" class="avatar"> 
+									<h4 class="name">{{ratingrow.name}}</h4>
+									<p>
+ 									 <input-stars  max="5" ng-model="ratingrow.rating" readonly="true"></input-stars>
+									</p> 
+									
+									
+									<div class="pull-right">
+										<a href="" ng-click="removeRating('md',ratingrow.Id)" class="text-danger"><i class="fa fa-trash-o"></i></a>
+									</div>
+
+							  </li>
+							</ul>
+							<uib-pagination ng-model="pageNo" ng-click="pageChanged()" items-per-page="pageSize" total-items="ratingCount"  max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></uib-pagination>	
+							
+							<div class="alert alert-danger" ng-if="ratingCount == 0">No Review for this place</div>
+
+								</div>
+							</div>
+					</div>
+					
+					
+
+					
+							 <div  ng-repeat="row in formData.placeTab.Results" id="tab{{row.Id}}" class="tab-pane">
+						  			<div class="form-group">
+										<label class="control-label">{{row.name}}</label>
+										<textarea ng-model="row.content" data-ck-editor></textarea>
+									</div>
+							</div>
+						
+						  
+						  
+						</div>
+					</div>
+
+					</form>
+
+</div>

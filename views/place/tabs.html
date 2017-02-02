@@ -1,0 +1,57 @@
+
+        <div class="modal-body">
+
+		
+		
+		
+		
+					
+										
+
+<div class="row">
+<div class="col-md-12">
+	<h3>Tabs List</h3>
+<hr>
+</div>
+	<div class="col-md-3">
+		<form method="POST" ng-submit="save()">
+				<div class="form-group">
+					<label for="exampleInputPassword1">Name</label>
+					<input type="text" ng-model="formData.name"  class="form-control" required>
+				</div>
+				<button type="submit"  class="btn btn-success btn-sm"><i class="fa fa-save"></i> Save</button>
+		</form>
+	</div>
+	<div class="col-md-9">					
+				<div class="alert alert-danger" ng-if="list.length <= 0">No Results Found</div>			
+				<table class="table table-bordered table-condensed" ng-if="list.length > 0">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th width="20%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in list">
+						<td>{{row.name}}</td>
+						<td>
+							<button class="btn btn-success btn-sm" ng-click="getById(row.Id)"><i class="fa fa-edit"></i></button>
+							<button class="btn btn-danger btn-sm" ng-click="delete(row.Id)"><i class="fa fa-trash-o"></i> </button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+	</div>
+</div>
+
+
+		
+		
+		
+		
+        </div>
+        <div class="modal-footer text-center">
+
+            <button class="btn btn-default" type="button" ng-click="close()"><i class="fa fa-times"></i> Close</button>
+        </div>

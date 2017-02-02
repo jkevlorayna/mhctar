@@ -1,0 +1,62 @@
+
+<div class="block-flat">
+						<div class="header">	
+								<div class="pull-right"> 
+									<a href="#/place/form/0"  class="btn btn-info"><i class="fa fa-plus-circle"></i> add</a>
+								</div>
+											<h3>Places List</h3>
+						</div>
+<div class="row">
+
+	<div class="col-md-12">
+											<form ng-submit="load()" class="form-inline filter_form">
+
+										<div  class="form-group">
+											<label for="exampleInputEmail3" class="sr-only">Filter Category by: </label>
+											<select ng-change="ChangeCategory()" class="form-control" ng-model="category">
+													<option value="all">All Category</option>
+													<option ng-repeat="row in categoryList" value="{{row.Id}}">{{row.Name}}</option>
+											</select>
+										</div>
+																<div class="form-group">
+							<input type="text" class="form-control" ng-model="searchText">
+
+						</div>
+						<div class="form-group">
+							<button class="btn btn-primary nomargin" type="submit">Submit</button>
+						</div>
+										
+										</form>
+
+					
+				<table class="table table-bordered table-condensed">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Category</th>
+						<th>Address</th>
+						<th width="15%"></th>
+						<th width="12%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in list">
+						<td>{{row.Name}}</td>
+						<td>{{row.Category}}</td>
+						<td>{{row.Address}}</td>
+						<td class="text-center">
+							<a href="#/place/map/{{row.Id}}"  class="btn btn-success btn-sm"><i class="fa fa-map-marker"></i> Preview Map </a>
+						</td>
+						<td>
+							<a href="#/place/form/{{row.Id}}"  class="btn btn-success btn-sm"> <i class="fa fa-edit"></i> </a>
+
+							<a href="javascript:void(0)" ng-click="openDeleteModal('md',row.Id)"  class="btn btn-danger btn-sm"> <i class="fa fa-trash-o"></i> </a>
+							
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			  <uib-pagination ng-model="pageNo" ng-click="pageChanged()" items-per-page="pageSize" total-items="count"  max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages"></uib-pagination>
+	</div>
+</div>
+</div>
